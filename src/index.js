@@ -25,6 +25,11 @@ passport.deserializeUser((user, done) => {
 });
 
 function setOptions(options) {
+
+    if (!options.oktaIssuer || !options.oktaEntryPoint || !options.oktaCert) {
+        throw new Error("Required options have to be defined: oktaIssuer, oktaEntryPoint, oktaCert");
+    }
+
     appUrl = options.appUrl || '/';
     loginUrl = options.loginUrl || '/login';
     logoutUrl = options.logoutUrl || '/logout';

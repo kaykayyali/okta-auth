@@ -1,6 +1,6 @@
 {
   "name": "okta-auth",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Okta Authentication for ExpressJS (NodeJS)",
   "main": "src/index.js",
   "scripts": {

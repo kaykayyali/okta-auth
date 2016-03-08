@@ -1,0 +1,20 @@
+{
+  "name": "okta-auth",
+  "version": "0.1.0",
+  "description": "Okta Authentication for ExpressJS (NodeJS)",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "okta",
+    "passport",
+    "saml"
+  ],
+  "author": "Wojciech Krawczyk <wojciech.krawczyk@schibsted.pl>",
+  "license": "ISC",
+  "dependencies": {
+    "passport": "^0.3.2",
+    "passport-saml": "^0.15.0"
+  }
+}

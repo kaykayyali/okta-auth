@@ -35,7 +35,7 @@ function setOptions(options) {
     logoutUrl = options.logoutUrl || '/logout';
     oktaDestinationUrl = options.destinationUrl || '/login/callback';
     accessDeniedUrl = options.accessDeniedUrl || '/access-denied';
-    if( typeof options.defaultAccessDeniedPage === 'undefined' ) {
+    if (typeof options.defaultAccessDeniedPage === 'undefined') {
         addDefaultAccessDeniedPage = true;
     } else {
         addDefaultAccessDeniedPage = options.defaultAccessDeniedPage;
@@ -85,7 +85,7 @@ function initApp(app) {
         res.redirect(accessDeniedUrl);
     });
 
-    if (addDefaultAccessDeniedPage) {
+    if (addDefaultAccessDeniedPage && accessDeniedUrl.substr(0, 4) !== 'http') {
         app.get(accessDeniedUrl, (req, res) => {
             res.status(401);
             res.type('text/html');

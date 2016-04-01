@@ -35,7 +35,11 @@ function setOptions(options) {
     logoutUrl = options.logoutUrl || '/logout';
     oktaDestinationUrl = options.destinationUrl || '/login/callback';
     accessDeniedUrl = options.accessDeniedUrl || '/access-denied';
-    addDefaultAccessDeniedPage = !!options.defaultAccessDeniedPage;
+    if( typeof options.defaultAccessDeniedPage === 'undefined' ) {
+        addDefaultAccessDeniedPage = true;
+    } else {
+        addDefaultAccessDeniedPage = options.defaultAccessDeniedPage;
+    }
     oktaFields = options.oktaFields || ['email', 'firstName', 'lastName'];
 
     oktaIssuer = options.oktaIssuer;

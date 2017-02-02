@@ -59,7 +59,10 @@ function initPassportSamlStrategy() {
              if (!profile) {
                 return done(new Error("No profile found"), null);
             }
-            console.log("GOT ", profile);
+            console.log("GOT ", profile, profile.getAssertionXml);
+            var x = profile.getAssertionXml();
+            console.log("PROFILE ASSERTIONS", profile.getAssertionXml());
+            console.log("x", x);
             var user = {};
             oktaFields.forEach((paramName) => {
                 user[paramName] = profile[paramName];

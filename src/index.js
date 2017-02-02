@@ -35,7 +35,7 @@ function setOptions(options) {
     logoutUrl = options.logoutUrl || '/logout';
     oktaDestinationUrl = options.destinationUrl || '/login/callback';
     accessDeniedUrl = options.accessDeniedUrl || '/access-denied';
-    if (typeof options.defaultAccessDeniedPage === 'undefined') {
+    if( typeof options.defaultAccessDeniedPage === 'undefined' ) {
         addDefaultAccessDeniedPage = true;
     } else {
         addDefaultAccessDeniedPage = options.defaultAccessDeniedPage;
@@ -56,9 +56,10 @@ function initPassportSamlStrategy() {
             cert: oktaCert
         },
         (profile, done) => {
-            if (!profile.email) {
-                return done(new Error("No email found"), null);
+             if (!profile) {
+                return done(new Error("No profile found"), null);
             }
+            console.log("GOT ", profile);
             var user = {};
             oktaFields.forEach((paramName) => {
                 user[paramName] = profile[paramName];
@@ -72,7 +73,7 @@ function initApp(app) {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    app.post(oktaDestinationUrl,
+    app.post(loginUrl,
         passport.authenticate('saml', {failureRedirect: accessDeniedUrl, failureFlash: true}),
         (req, res) => res.redirect(appUrl));
 
@@ -85,7 +86,7 @@ function initApp(app) {
         res.redirect(accessDeniedUrl);
     });
 
-    if (addDefaultAccessDeniedPage && accessDeniedUrl.substr(0, 4) !== 'http') {
+    if (addDefaultAccessDeniedPage) {
         app.get(accessDeniedUrl, (req, res) => {
             res.status(401);
             res.type('text/html');
